@@ -1,0 +1,29 @@
+global:
+  smtp_smarthost: 'smtp.example.com:587'
+  smtp_from: 'alertmanager@example.com'
+  smtp_auth_username: 'alertmanager@example.com'
+  smtp_auth_password: 'password'
+
+route:
+  receiver: 'default-receiver'
+
+receivers:
+  - name: 'slack-notifications'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX'
+        channel: '#alerts'
+        send_resolved: true
+
+  - name: 'email-notifications'
+    email_configs:
+      - to: 'devops@example.com'
+        send_resolved: true
+
+  - name: 'default-receiver'
+    slack_configs:
+      - api_url: 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX'
+        channel: '#alerts'
+        send_resolved: true
+    email_configs:
+      - to: 'devops@example.com'
+        send_resolved: true
